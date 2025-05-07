@@ -4,7 +4,7 @@ const HomePage = () => {
   return (
     <div>
       <h1>hello</h1>
-      <Button variant="text">Text</Button>
+      <Button>Text</Button>
     </div>
   );
 };
