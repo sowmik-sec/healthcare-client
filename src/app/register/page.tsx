@@ -11,35 +11,19 @@ import {
 import Image from "next/image";
 import assets from "@/assets";
 import Link from "next/link";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { modifyPayload } from "@/utils/modifyPayload";
 import { registerPatient } from "@/services/actions/registerPatient";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { userLogin } from "@/services/actions/userLogin";
 import { storeUserInfo } from "@/services/actions/auth.service";
-
-interface IPatientData {
-  name: string;
-  email: string;
-  contactNumber: string;
-  address: string;
-}
-
-interface IPatientRegisterFormData {
-  password: string;
-  patient: IPatientData;
-}
+import PHForm from "@/components/Forms/PHForm";
+import PHInput from "@/components/Forms/PHInput";
 
 const RegisterPage = () => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<IPatientRegisterFormData>();
   const router = useRouter();
-  const onSubmit: SubmitHandler<IPatientRegisterFormData> = async (values) => {
+  const handleRegister = async (values: FieldValues) => {
     const data = modifyPayload(values);
     try {
       const res = await registerPatient(data);
@@ -95,58 +79,50 @@ const RegisterPage = () => {
             </Box>
           </Stack>
           <Box>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <PHForm onSubmit={handleRegister}>
               <Grid container spacing={2} my={1}>
                 <Grid size={{ md: 12 }}>
-                  <TextField
-                    id="outlined-basic"
+                  <PHInput
+                    name="patient.name"
                     label="Name"
-                    variant="outlined"
-                    size="small"
                     fullWidth={true}
-                    {...register("patient.name")}
+                    required={true}
                   />
                 </Grid>
                 <Grid size={{ md: 6 }}>
-                  <TextField
-                    id="outlined-basic"
+                  <PHInput
+                    name="patient.email"
                     label="Email"
                     type="email"
-                    variant="outlined"
-                    size="small"
                     fullWidth={true}
-                    {...register("patient.email")}
+                    required={true}
                   />
                 </Grid>
                 <Grid size={{ md: 6 }}>
-                  <TextField
-                    id="outlined-basic"
+                  <PHInput
+                    name="password"
                     label="Password"
                     type="password"
-                    size="small"
                     fullWidth={true}
-                    {...register("password")}
+                    required={true}
                   />
                 </Grid>
                 <Grid size={{ md: 6 }}>
-                  <TextField
-                    id="outlined-basic"
+                  <PHInput
+                    name="patient.contactNumber"
                     label="Contact Number"
                     type="tel"
-                    variant="outlined"
-                    size="small"
                     fullWidth={true}
-                    {...register("patient.contactNumber")}
+                    required={true}
                   />
                 </Grid>
                 <Grid size={{ md: 6 }}>
-                  <TextField
-                    id="outlined-basic"
+                  <PHInput
+                    name="patient.address"
                     label="Address"
                     type="text"
-                    size="small"
                     fullWidth={true}
-                    {...register("patient.address")}
+                    required={true}
                   />
                 </Grid>
               </Grid>
@@ -156,7 +132,7 @@ const RegisterPage = () => {
               <Typography component="p" fontWeight={300}>
                 Do you already have an account? <Link href="/login">Login</Link>
               </Typography>
-            </form>
+            </PHForm>
           </Box>
         </Box>
       </Stack>
