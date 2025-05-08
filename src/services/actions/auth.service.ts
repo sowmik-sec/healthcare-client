@@ -12,7 +12,7 @@ export const storeUserInfo = ({ accessToken }: { accessToken: string }) => {
 
 export const getUserInfo = () => {
   const authToken = getFromLocalStorage(authKey);
-  if (authToken) {
+  if (typeof authToken === "string" && authToken !== "undefined") {
     const decodedData: any = decodedToken(authToken);
     return {
       ...decodedData,

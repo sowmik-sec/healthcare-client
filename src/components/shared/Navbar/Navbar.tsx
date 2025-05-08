@@ -6,11 +6,17 @@ import {
 } from "@/services/actions/auth.service";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const userInfo = getUserInfo();
   const isUserLoggedIn = isLoggedIn();
+  const router = useRouter();
+  const handleLogOUt = () => {
+    removeUser();
+    router.refresh();
+  };
 
   return (
     <Container>
@@ -41,7 +47,7 @@ const Navbar = () => {
             Login
           </Button>
         ) : (
-          <Button onClick={() => removeUser()} color="error">
+          <Button onClick={handleLogOUt} color="error">
             Logout
           </Button>
         )}

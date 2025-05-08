@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { toast } from "sonner";
 
 export type FormValues = {
   email: string;
@@ -35,7 +36,7 @@ const LoginPage = () => {
       const res = await userLogin(values);
       if (res?.data?.accessToken) {
         storeUserInfo({ accessToken: res.data.accessToken });
-        console.log(res);
+        toast.success("User logged in successfully");
         router.push("/");
       }
     } catch (error: any) {
