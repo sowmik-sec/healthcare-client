@@ -1,7 +1,17 @@
+"use client";
+import {
+  getUserInfo,
+  isLoggedIn,
+  removeUser,
+} from "@/services/actions/auth.service";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
+  const userInfo = getUserInfo();
+  const isUserLoggedIn = isLoggedIn();
+
   return (
     <Container>
       <Stack
@@ -26,9 +36,15 @@ const Navbar = () => {
           <Typography>Diagnostics</Typography>
           <Typography>NGOs</Typography>
         </Stack>
-        <Button component={Link} href="/login">
-          Login
-        </Button>
+        {!isUserLoggedIn ? (
+          <Button component={Link} href="/login">
+            Login
+          </Button>
+        ) : (
+          <Button onClick={() => removeUser()} color="error">
+            Logout
+          </Button>
+        )}
       </Stack>
     </Container>
   );

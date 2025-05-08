@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 export type FormValues = {
@@ -27,6 +28,7 @@ const LoginPage = () => {
     watch,
     formState: { errors },
   } = useForm<FormValues>();
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (values) => {
     try {
@@ -34,6 +36,7 @@ const LoginPage = () => {
       if (res?.data?.accessToken) {
         storeUserInfo({ accessToken: res.data.accessToken });
         console.log(res);
+        router.push("/");
       }
     } catch (error: any) {
       console.error(error.message);
