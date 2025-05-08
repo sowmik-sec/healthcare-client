@@ -1,4 +1,6 @@
+"use client";
 import assets from "@/assets";
+import { userLogin } from "@/services/actions/userLogin";
 import {
   Box,
   Button,
@@ -10,8 +12,29 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+export type FormValues = {
+  email: string;
+  password: string;
+};
 
 const LoginPage = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormValues>();
+
+  const onSubmit: SubmitHandler<FormValues> = async (values) => {
+    try {
+      const res = await userLogin(values);
+      console.log(res);
+    } catch (error: any) {
+      console.error(error.message);
+    }
+  };
   return (
     <Container>
       <Stack
@@ -43,7 +66,7 @@ const LoginPage = () => {
             </Box>
           </Stack>
           <Box>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Grid container spacing={2} my={1}>
                 <Grid size={{ md: 6 }}>
                   <TextField
@@ -53,6 +76,7 @@ const LoginPage = () => {
                     variant="outlined"
                     size="small"
                     fullWidth={true}
+                    {...register("email")}
                   />
                 </Grid>
                 <Grid size={{ md: 6 }}>
@@ -62,13 +86,14 @@ const LoginPage = () => {
                     type="password"
                     size="small"
                     fullWidth={true}
+                    {...register("password")}
                   />
                 </Grid>
               </Grid>
               <Typography mb={1} textAlign="end" component="p" fontWeight={300}>
                 Forgot Password?
               </Typography>
-              <Button fullWidth sx={{ my: 2 }}>
+              <Button type="submit" fullWidth sx={{ my: 2 }}>
                 Login
               </Button>
               <Typography component="p" fontWeight={300}>
