@@ -13,9 +13,10 @@ import Link from "next/link";
 
 const RegisterPage = () => {
   return (
-    <Container sx={{ padding: "50px" }}>
+    <Container>
       <Stack
         sx={{
+          height: "100vh",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -99,7 +100,7 @@ const RegisterPage = () => {
               <Button fullWidth sx={{ my: 2 }}>
                 Register
               </Button>
-              <Typography component="p" fontWeight={600}>
+              <Typography component="p" fontWeight={300}>
                 Do you already have an account? <Link href="/login">Login</Link>
               </Typography>
             </form>
