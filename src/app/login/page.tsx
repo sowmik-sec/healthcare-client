@@ -1,6 +1,7 @@
 "use client";
 import assets from "@/assets";
 import PHForm from "@/components/Forms/PHForm";
+import PHInput from "@/components/Forms/PHInput";
 import { storeUserInfo } from "@/services/actions/auth.service";
 import { userLogin } from "@/services/actions/userLogin";
 import {
@@ -67,24 +68,19 @@ const LoginPage = () => {
             <PHForm onSubmit={handleLogin}>
               <Grid container spacing={2} my={1}>
                 <Grid size={{ md: 6 }}>
-                  <TextField
-                    id="outlined-basic"
+                  <PHInput
+                    name="email"
                     label="Email"
                     type="email"
-                    variant="outlined"
-                    size="small"
                     fullWidth={true}
-                    {...register("email")}
                   />
                 </Grid>
                 <Grid size={{ md: 6 }}>
-                  <TextField
-                    id="outlined-basic"
+                  <PHInput
+                    name="password"
                     label="Password"
                     type="password"
-                    size="small"
                     fullWidth={true}
-                    {...register("password")}
                   />
                 </Grid>
               </Grid>
