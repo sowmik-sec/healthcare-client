@@ -1,8 +1,112 @@
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import Image from "next/image";
+import assets from "@/assets";
+import Link from "next/link";
+
 const RegisterPage = () => {
   return (
-    <div>
-      <h1>Register here</h1>
-    </div>
+    <Container sx={{ padding: "50px" }}>
+      <Stack
+        sx={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Box
+          sx={{
+            boxShadow: 1,
+            borderRadius: 1,
+            p: 4,
+            maxWidth: 600,
+            width: "100%",
+            textAlign: "center",
+          }}
+        >
+          <Stack
+            sx={{
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Box>
+              <Image src={assets.svgs.logo} width={50} height={50} alt="logo" />
+            </Box>
+            <Box>
+              <Typography variant="h6" fontWeight={600}>
+                Patient Register
+              </Typography>
+            </Box>
+          </Stack>
+          <Box>
+            <form>
+              <Grid container spacing={2} my={1}>
+                <Grid size={{ md: 12 }}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Name"
+                    variant="outlined"
+                    size="small"
+                    fullWidth={true}
+                  />
+                </Grid>
+                <Grid size={{ md: 6 }}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Email"
+                    type="email"
+                    variant="outlined"
+                    size="small"
+                    fullWidth={true}
+                  />
+                </Grid>
+                <Grid size={{ md: 6 }}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Password"
+                    type="password"
+                    size="small"
+                    fullWidth={true}
+                  />
+                </Grid>
+                <Grid size={{ md: 6 }}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Contact Number"
+                    type="tel"
+                    variant="outlined"
+                    size="small"
+                    fullWidth={true}
+                  />
+                </Grid>
+                <Grid size={{ md: 6 }}>
+                  <TextField
+                    id="outlined-basic"
+                    label="Address"
+                    type="text"
+                    size="small"
+                    fullWidth={true}
+                  />
+                </Grid>
+              </Grid>
+              <Button fullWidth sx={{ my: 2 }}>
+                Register
+              </Button>
+              <Typography component="p" fontWeight={600}>
+                Do you already have an account? <Link href="/login">Login</Link>
+              </Typography>
+            </form>
+          </Box>
+        </Box>
+      </Stack>
+    </Container>
   );
 };
 
