@@ -6,7 +6,6 @@ const specialtiesApi = baseApi.injectEndpoints({
     createSpecialty: build.mutation({
       query: (data) => ({
         url: "/specialties",
-
         method: "POST",
         contentType: "multipart/form-data",
         data,
