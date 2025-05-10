@@ -12,7 +12,15 @@ const specialtiesApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: [tagTypes.specialties],
     }),
+    getAllSpecialties: build.query({
+      query: () => ({
+        url: "/specialties",
+        method: "GET",
+      }),
+      providesTags: [tagTypes.specialties],
+    }),
   }),
 });
 
-export const { useCreateSpecialtyMutation } = specialtiesApi;
+export const { useCreateSpecialtyMutation, useGetAllSpecialtiesQuery } =
+  specialtiesApi;
