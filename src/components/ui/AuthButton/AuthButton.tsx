@@ -3,6 +3,7 @@ import {
   isLoggedIn,
   removeUser,
 } from "@/services/actions/auth.service";
+import { logoutUser } from "@/services/actions/logoutUser";
 import { Button } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -12,8 +13,7 @@ const AuthButton = () => {
   const isUserLoggedIn = isLoggedIn();
   const router = useRouter();
   const handleLogOUt = () => {
-    removeUser();
-    router.refresh();
+    logoutUser(router);
   };
 
   return (
