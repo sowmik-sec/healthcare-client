@@ -1,5 +1,6 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Specialist = async () => {
@@ -44,6 +45,8 @@ const Specialist = async () => {
                   borderRadius: "10px",
                 },
               }}
+              component={Link}
+              href={`/doctors?specialties=${specialty.title}`}
             >
               <Image src={specialty.icon} alt="" width={100} height={100} />
               <Box>
